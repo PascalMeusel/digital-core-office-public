@@ -1,0 +1,154 @@
+:root {
+  --page: #f4f7f8;
+  --ink: #243041;
+  --ink-strong: #0f172a;
+  --muted: #64748b;
+  --line: #dbe3ea;
+  --line-strong: #bdc9d6;
+  --surface: #ffffff;
+  --surface-raised: rgba(255, 255, 255, 0.95);
+  --surface-soft: #f8fafc;
+  --surface-muted: #fbfdfe;
+  --surface-subtle: rgba(255, 255, 255, 0.62);
+  --surface-input: #ffffff;
+  --surface-topbar: rgba(250, 252, 253, 0.94);
+  --surface-active: #e8f3f1;
+  --surface-hover: #eef7f8;
+  --surface-disabled: #f8fafc;
+  --surface-danger: #fef2f2;
+  --surface-danger-soft: #fffafa;
+  --surface-success: #f0fdf4;
+  --surface-info: #f0f9ff;
+  --surface-warning: #fff7ed;
+  --surface-code: #f1f5f9;
+  --surface-weekend: #f1f5f9;
+  --line-subtle: #edf2f7;
+  --shadow-soft: rgba(15, 23, 42, 0.06);
+  --shadow-medium: rgba(15, 23, 42, 0.16);
+  --shadow-strong: rgba(15, 23, 42, 0.22);
+  --focus-ring: rgba(14, 165, 233, 0.26);
+  --danger-line: #fecaca;
+  --danger-text: #991b1b;
+  --success-line: #bbf7d0;
+  --success-text: #166534;
+  --info-line: #bae6fd;
+  --info-text: #075985;
+  --warning-text: #c2410c;
+  --hover-line: #9cc7d4;
+  --disabled-text: #cbd5e1;
+  --brand-teal: #0f766e;
+  --brand-teal-strong: #0d6b63;
+  --brand-blue: #2563eb;
+  --chip-neutral-bg: #e2e8f0;
+  --chip-neutral-text: #334155;
+  --chip-muted-bg: #f1f5f9;
+  --chip-success-bg: #d1fae5;
+  --chip-success-text: #047857;
+  --chip-warning-bg: #fef3c7;
+  --chip-warning-text: #92400e;
+  --chip-danger-bg: #fee2e2;
+  --chip-danger-text: #b91c1c;
+  --chip-info-bg: #dbeafe;
+  --chip-info-text: #1d4ed8;
+  --chip-purple-bg: #ede9fe;
+  --chip-purple-text: #6d28d9;
+  --chip-indigo-bg: #e0e7ff;
+  --chip-indigo-text: #4338ca;
+  --chip-pink-bg: #fce7f3;
+  --chip-pink-text: #be185d;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--page);
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='dark'] {
+  --page: #101418;
+  --ink: #d8e0e8;
+  --ink-strong: #f4f8fb;
+  --muted: #94a3b8;
+  --line: #2b3844;
+  --line-strong: #3c4a57;
+  --surface: #171d22;
+  --surface-raised: rgba(23, 29, 34, 0.96);
+  --surface-soft: #1d252c;
+  --surface-muted: #13191e;
+  --surface-subtle: rgba(23, 29, 34, 0.7);
+  --surface-input: #10161b;
+  --surface-topbar: rgba(16, 20, 24, 0.95);
+  --surface-active: rgba(20, 184, 166, 0.16);
+  --surface-hover: rgba(45, 212, 191, 0.13);
+  --surface-disabled: #1a2229;
+  --surface-danger: rgba(127, 29, 29, 0.26);
+  --surface-danger-soft: rgba(127, 29, 29, 0.16);
+  --surface-success: rgba(20, 83, 45, 0.28);
+  --surface-info: rgba(12, 74, 110, 0.26);
+  --surface-warning: rgba(120, 53, 15, 0.24);
+  --surface-code: #111920;
+  --surface-weekend: #151d23;
+  --line-subtle: rgba(148, 163, 184, 0.18);
+  --shadow-soft: rgba(0, 0, 0, 0.22);
+  --shadow-medium: rgba(0, 0, 0, 0.34);
+  --shadow-strong: rgba(0, 0, 0, 0.48);
+  --focus-ring: rgba(45, 212, 191, 0.28);
+  --danger-line: rgba(248, 113, 113, 0.45);
+  --danger-text: #fecaca;
+  --success-line: rgba(74, 222, 128, 0.42);
+  --success-text: #bbf7d0;
+  --info-line: rgba(125, 211, 252, 0.44);
+  --info-text: #bae6fd;
+  --warning-text: #fed7aa;
+  --hover-line: rgba(45, 212, 191, 0.45);
+  --disabled-text: #64748b;
+  --brand-teal: #2dd4bf;
+  --brand-teal-strong: #14b8a6;
+  --brand-blue: #60a5fa;
+  --chip-neutral-bg: #26313b;
+  --chip-neutral-text: #d6dee8;
+  --chip-muted-bg: #202933;
+  --chip-success-bg: rgba(16, 185, 129, 0.18);
+  --chip-success-text: #6ee7b7;
+  --chip-warning-bg: rgba(245, 158, 11, 0.18);
+  --chip-warning-text: #fbbf24;
+  --chip-danger-bg: rgba(248, 113, 113, 0.18);
+  --chip-danger-text: #fca5a5;
+  --chip-info-bg: rgba(96, 165, 250, 0.18);
+  --chip-info-text: #93c5fd;
+  --chip-purple-bg: rgba(167, 139, 250, 0.18);
+  --chip-purple-text: #c4b5fd;
+  --chip-indigo-bg: rgba(129, 140, 248, 0.18);
+  --chip-indigo-text: #c7d2fe;
+  --chip-pink-bg: rgba(244, 114, 182, 0.18);
+  --chip-pink-text: #f9a8d4;
+  color-scheme: dark;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--page);
+}
+
+button,
+input,
+textarea,
+select {
+  letter-spacing: 0;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+p {
+  margin: 0;
+}

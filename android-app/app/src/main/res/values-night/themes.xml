@@ -1,0 +1,5 @@
+<resources>
+    <style name="Theme.DigitalCoreOffice" parent="Base.Theme.DigitalCoreOffice">
+        <item name="colorOnPrimary">@color/brand_navy</item>
+    </style>
+</resources>

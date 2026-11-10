@@ -1,0 +1,20 @@
+function escape(value: string) {
+  return value.replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]!))
+}
+
+export function operatorPage(kind: 'imprint' | 'privacy' | 'support', values: NodeJS.ProcessEnv = process.env) {
+  const name = values.DCO_OPERATOR_NAME?.trim()
+  const address = values.DCO_OPERATOR_ADDRESS?.trim()
+  const support = values.DCO_SUPPORT_EMAIL?.trim()
+  const privacy = values.DCO_PRIVACY_EMAIL?.trim() || support
+  const contact = (email: string | undefined) => email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ? `<a href="mailto:${escape(email)}">${escape(email)}</a>` : 'Bitte wenden Sie sich an Ihren Administrator. / Contact your administrator.'
+  const titles = { imprint: 'Impressum / Legal notice', privacy: 'Datenschutz / Privacy', support: 'Support / Hilfe' }
+  const operator = name && address ? `<p><strong>${escape(name)}</strong></p><p class="pre">${escape(address.replaceAll('\\n', '\n'))}</p>`
+    : '<p>Die Betreiberangaben für diese Installation wurden noch nicht eingerichtet. / Operator details for this installation have not yet been configured.</p>'
+  let body = operator
+  if (kind === 'imprint') body += `<h2>Kontakt / Contact</h2><p>${contact(support)}</p>`
+  if (kind === 'support') body += `<h2>Hilfe und Sicherheitsmeldungen / Help and security reports</h2><p>${contact(support)}</p><p>Bitte nennen Sie Version und Schritte bis zum Fehler. Senden Sie keine Passwörter, Schlüssel oder vertraulichen Geschäftsdaten. / Include the version and steps to reproduce. Do not send passwords, keys, or confidential business data.</p>`
+  if (kind === 'privacy') body += `<h2>Diese Installation / This installation</h2><p>Der oben genannte Betreiber ist für die Verarbeitung auf diesem Server verantwortlich. Je nach aktivierten Systemen werden Konten, Arbeitszeit- und Abwesenheitsdaten, Inventar- und Wareneingangsdaten sowie Projektarbeit verarbeitet. / The operator above is responsible for processing on this server. Depending on enabled systems, it processes accounts, time and leave records, inventory and receipt data, and project work.</p><h2>Kontakt zum Datenschutz / Privacy contact</h2><p>${contact(privacy)}</p><h2>Informationen des Betreibers / Operator's processing information</h2><p class="pre">${values.DCO_PRIVACY_DETAILS?.trim() ? escape(values.DCO_PRIVACY_DETAILS.replaceAll('\\n', '\n')) : 'Noch nicht eingerichtet. Fordern Sie die vollständigen Informationen bei Ihrem Betreiber an. / Not configured yet. Request complete processing information from your operator.'}</p><h2>App und Gerät / App and device</h2><p>Die Android-App verbindet sich mit dem gewählten Server und speichert Serveradresse und Sitzungsdaten lokal. Beim Serverwechsel werden diese Webseitendaten gelöscht. Exportierte Dateien bleiben an dem von Ihnen gewählten Speicherort. Der QR-Scanner verwendet Google Play-Dienste. / The Android app connects to the selected server and stores its address and session data locally. Changing servers clears this site data. Exported files remain at your chosen destination. QR scanning uses Google Play services.</p>`
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Digital Core Office · ${titles[kind]}</title><style>body{margin:0;background:#f2f7f9;color:#14343b;font:16px/1.65 system-ui,sans-serif}main{max-width:850px;margin:40px auto;padding:28px;background:white;border-radius:14px}h1{line-height:1.2}h2{font-size:1.15rem;margin-top:28px}a{color:#0f766e}.pre{white-space:pre-wrap}nav{padding-top:24px;border-top:1px solid #dde5e7}@media(max-width:600px){main{margin:12px;padding:22px}}</style></head><body><main><p>Digital Core Office</p><h1>${titles[kind]}</h1>${body}<nav><a href="/">Digital Core Office</a> · <a href="/imprint.html">Impressum</a> · <a href="/privacy.html">Datenschutz / Privacy</a> · <a href="/support.html">Support</a></nav></main></body></html>`
+}

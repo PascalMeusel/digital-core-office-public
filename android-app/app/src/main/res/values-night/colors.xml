@@ -1,0 +1,8 @@
+<resources>
+    <color name="brand_teal">#64CCC0</color>
+    <color name="office_background">#142128</color>
+    <color name="office_surface">#1D2E36</color>
+    <color name="office_text">#EDF4F6</color>
+    <color name="office_muted">#B6C9D1</color>
+    <color name="office_border">#405760</color>
+</resources>

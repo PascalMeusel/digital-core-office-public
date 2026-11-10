@@ -1,0 +1,9 @@
+[Unit]
+Description=Monthly Digital Core Office release retention
+
+[Timer]
+OnCalendar=*-*-01 04:30:00 Europe/Berlin
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "de.digitalcoreoffice",
+      "sha256_cert_fingerprints": [
+        "82:4C:E7:46:1B:7A:7D:48:17:7C:52:D2:3A:B6:66:78:9E:61:DD:59:93:DD:6D:6C:25:0B:68:C2:06:E6:8C:5A"
+      ]
+    }
+  }
+]

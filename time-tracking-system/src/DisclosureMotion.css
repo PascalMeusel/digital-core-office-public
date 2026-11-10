@@ -1,0 +1,2 @@
+.animated-region { display: flow-root; min-width: 0; }
+.animated-region[hidden] { display: none; }

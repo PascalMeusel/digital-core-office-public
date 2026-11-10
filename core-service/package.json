@@ -1,0 +1,46 @@
+{
+  "name": "digital-core-office-core",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx server/index.ts",
+    "dev": "concurrently -k -n api,web \"npm:server:dev\" \"npm:web:dev\"",
+    "server:dev": "tsx watch server/index.ts",
+    "web:dev": "vite --host 0.0.0.0 --port 5176",
+    "build": "tsc -p tsconfig.app.json && vite build",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.app.json",
+    "userbase:import-time": "tsx scripts/importTimeUsers.ts",
+    "userbase:import-inventory": "tsx scripts/importInventoryUsers.ts",
+    "userbase:import-agile": "tsx scripts/importAgileUsers.ts",
+    "userbase:disable-module-passwords": "tsx scripts/disableModulePasswords.ts",
+    "license:generate-keys": "tsx scripts/generateLicenseKeys.ts",
+    "license:issue": "tsx scripts/issueLicense.ts",
+    "license:install": "tsx scripts/installLicense.ts",
+    "test": "node --import tsx --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "@digital-core-office/suite-ui": "file:../packages/suite-ui",
+    "express": "^5.2.1",
+    "lucide-react": "^1.21.0",
+    "nodemailer": "^10.0.13",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "tsx": "^4.23.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.0",
+    "@types/nodemailer": "^7.0.11",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "concurrently": "^10.0.3",
+    "oxlint": "^1.69.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0"
+  }
+}

@@ -1,0 +1,194 @@
+.inventory-workflows { width: 100%; min-width: 0; }
+.clickup-panel { padding: 14px 16px; margin-block: 16px; border: 1px solid var(--line-strong); background: var(--surface-muted); border-radius: 6px; min-width: 0; }
+.clickup-panel > summary { color: var(--ink-strong); font-weight: 600; cursor: pointer; }
+.clickup-panel[open] > summary { margin-bottom: 16px; }
+.clickup-panel .workflow-row { flex-wrap: wrap; gap: 12px; }
+.clickup-panel .workflow-row > div { flex: 1 1 0%; }
+.clickup-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; border: 0; padding: 12px 0; margin: 0; min-width: 0; }
+.clickup-fields legend { padding: 0; font-weight: 600; margin-top: 16px; }
+.clickup-account { margin-block: 12px; max-width: 680px; }
+.clickup-account-details { margin-bottom: 16px; color: var(--muted); }
+.clickup-preview { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; line-height: 1.6; padding: 16px; border: 1px solid var(--line); background: var(--surface); }
+.clickup-request { margin-block: 0 16px; }
+@media (max-width: 600px) { .clickup-fields { grid-template-columns: minmax(0, 1fr); } .clickup-panel { padding: 12px; } }
+.inventory-workflows .workflow-page { display: block; margin-bottom: 20px; box-shadow: none; }
+.workflow-body { padding: 0 24px 24px; }
+.workflow-body > section { margin-block: 28px; scroll-margin-top: 150px; }
+.workflow-feedback { min-height: 20px; padding: 0 4px 8px; color: var(--brand-main); font-size: 13px; }
+.inventory-workflows h3, .inventory-workflows h4 { color: var(--ink-strong); }
+.inventory-workflows .workspace-page-header { background: var(--surface-soft); border-bottom: 1px solid var(--line-strong); margin-bottom: 20px; }
+.inventory-workflows p { line-height: 1.55; overflow-wrap: anywhere; white-space: pre-wrap; }
+.inventory-workflows a { color: var(--brand-main); overflow-wrap: anywhere; text-underline-offset: 3px; }
+.inventory-workflows small { display: block; color: var(--muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; margin-top: 4px; }
+.inventory-workflows label { display: grid; align-content: start; gap: 7px; min-width: 0; color: var(--ink); font-size: 13px; }
+.inventory-workflows input, .inventory-workflows select, .inventory-workflows textarea { width: 100%; min-width: 0; border: 1px solid var(--line-strong); background: var(--surface-input); color: var(--ink); border-radius: 6px; padding: 10px 12px; }
+.inventory-workflows textarea { min-height: 90px; resize: vertical; }
+.inventory-workflows input[type=checkbox] { width: 17px; height: 17px; margin: 0; flex: 0 0 auto; }
+.inventory-workflows input[type=radio] { width: 17px; height: 17px; margin: 0; flex: 0 0 auto; accent-color: var(--brand-main); }
+.workflow-need { display: grid; gap: 16px; min-width: 0; }
+.workflow-need p { margin: 0; }
+.need-quantity { display: grid; grid-template-columns: minmax(0, 1fr) minmax(80px, 1fr); align-items: end; gap: 16px; }
+.need-quantity > span { padding-block: 10px; }
+.need-catalog { min-width: 0; }
+.need-catalog-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 10px; font-size: 13px; }
+.need-matches { display: flex; flex-direction: column; max-height: clamp(180px, 35dvh, 340px); overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--line-strong); border-radius: 6px; }
+.need-matches > button { flex-shrink: 0; text-align: left; padding: 12px; background: var(--surface); color: var(--ink-strong); border: 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.need-matches > button:hover { background: var(--surface-hover); }
+.need-matches > button:focus-visible { outline-offset: -3px; }
+.need-matches > button:last-child { border-bottom: 0; }
+.inventory-workflow-editor .need-source { display: grid; gap: 12px; padding: 12px 0; border-block: 1px solid var(--line); }
+.need-source legend { font-size: 13px; font-weight: 600; }
+.request-progress { margin-top: 12px; padding-inline-start: 12px; border-inline-start: 3px solid var(--line-strong); max-width: 68ch; }
+.request-progress .request-next { color: var(--ink-strong); font-size: 13px; margin-block: 0 6px; }
+.request-progress summary { font-size: 12px; color: var(--brand-main); cursor: pointer; margin-top: 8px; }
+.request-steps { display: grid; gap: 10px; padding-inline-start: 24px; margin-block: 12px; }
+.request-steps li { color: var(--muted); padding-inline-start: 4px; font-size: 13px; }
+.request-steps .is-complete { color: var(--ink); }
+.request-steps [aria-current=step] { color: var(--brand-main); font-weight: 700; }
+.workflow-setup-note { border-inline-start: 3px solid var(--line-strong); padding: 8px 0 8px 16px; margin-block: 16px; max-width: 72ch; }
+.workflow-setup-note p { margin-block: 8px 12px; }
+.inventory-workflows :is(button,input,select,textarea,summary,a):focus-visible, .inventory-more-menu :focus-visible { outline: 3px solid var(--brand-secondary); outline-offset: 3px; }
+.inventory-workflows button { white-space: normal; overflow-wrap: anywhere; }
+.inventory-workflows .form-actions { flex-wrap: wrap; gap: 8px; margin-block: 12px; }
+.inventory-workflows .workflow-check { display: flex; align-items: center; gap: 10px; }
+.workflow-summary { display: flex; flex-wrap: wrap; border-block: 1px solid var(--line-strong); background: var(--surface-soft); margin-block: 8px 24px; }
+.workflow-summary button { flex: 1 1 150px; display: grid; gap: 6px; padding: 20px; border: 0; background: transparent; color: var(--muted); text-align: left; cursor: pointer; }
+.workflow-summary button:hover { background: var(--surface-hover); }
+.workflow-summary strong { font-size: 28px; color: var(--ink-strong); font-variant-numeric: tabular-nums; }
+.workflow-row { display: flex; align-items: start; justify-content: space-between; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.workflow-row > div { min-width: 0; }
+.workflow-scroll-list { max-height: min(380px, 45dvh); overflow-y: auto; overscroll-behavior: contain; border-block: 1px solid var(--line); padding-inline: 4px; }
+.workflow-row strong { overflow-wrap: anywhere; }
+.workflow-row p { margin: 8px 0; }
+.workflow-row-actions { display: flex; flex-wrap: wrap; align-items: start; justify-content: end; gap: 8px; max-width: 380px; flex-shrink: 0; }
+.workflow-status { font-size: 12px; font-weight: 600; padding: 5px 8px; color: var(--ink); background: var(--surface-soft); border: 1px solid currentColor; border-radius: 4px; }
+.workflow-status-pending, .workflow-status-deferred, .workflow-status-changes_requested { color: var(--status-wait-ink); background: var(--status-wait-bg); }
+.workflow-warning { color: var(--danger-text); }
+.workflow-status-approved, .workflow-status-fulfilled { color: var(--status-ready-ink); background: var(--status-ready-bg); }
+.workflow-status-ordered, .workflow-status-partial { color: var(--status-info-ink); background: var(--status-info-bg); }
+.workflow-note { padding-inline-start: 12px; border-inline-start: 3px solid var(--brand-secondary); }
+.workflow-request-batch { border: 1px solid var(--line-strong); border-radius: 6px; margin-block: 16px; padding-inline: 20px; scroll-margin-top: 150px; }
+.workflow-batch-header { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 12px 24px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.workflow-batch-header h4 { margin: 0; overflow-wrap: anywhere; }
+.workflow-batch-header > div { min-width: 0; }
+.workflow-batch-header .form-actions { margin: 0; }
+.workflow-request-batch .workflow-row:last-child { border-bottom: 0; }
+.workflow-review-position { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 1fr); gap: 20px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.workflow-review-position strong { overflow-wrap: anywhere; }
+.workflow-review-decision { display: grid; align-content: start; gap: 12px; }
+.workflow-status-deferred { border-inline-start-width: 3px; }
+@media (max-width: 700px) {
+  .workflow-request-batch { padding-inline: 12px; }
+  .workflow-review-position { grid-template-columns: minmax(0, 1fr); }
+}
+.workflow-filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; margin-block: 20px; }
+.inventory-workflows details { min-width: 0; margin-block: 16px; }
+.inventory-workflows summary { cursor: pointer; padding: 14px 0; color: var(--ink-strong); overflow-wrap: anywhere; }
+.inventory-workflows summary > span { color: var(--muted); font-size: 13px; margin-left: 12px; }
+.workflow-product, .workflow-build, .workflow-stock-item, .workflow-order { border-block-end: 1px solid var(--line); padding-bottom: 12px; }
+.workflow-stock-item summary { display: flex; justify-content: space-between; align-items: start; gap: 24px; list-style: none; }
+.workflow-stock-item summary::before { content: '+'; font-size: 19px; color: var(--brand-main); }
+.workflow-stock-item[open] summary::before { content: '−'; }
+.workflow-stock-item summary > div { flex: 1; min-width: 0; }
+.workflow-stock-item summary > span { margin-left: 0; max-width: 45%; text-align: right; }
+.workflow-count { color: var(--muted); font-size: 13px; }
+.inventory-workflows .table-scroll { max-width: 100%; overflow: auto; }
+.workflow-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.workflow-table th, .workflow-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; white-space: normal; overflow-wrap: anywhere; min-width: 95px; max-width: 320px; }
+.workflow-table th { font-weight: 600; color: var(--ink-strong); background: var(--surface-soft); border-bottom-color: var(--line-strong); }
+.workflow-table tbody tr:nth-child(even) { background: var(--surface-muted); }
+.workflow-table tbody tr:hover { background: var(--surface-hover); }
+.workflow-availability { padding: 16px; background: var(--surface-soft); border: 1px solid var(--line-strong); border-radius: 6px; }
+.workflow-availability p { margin-block: 8px; }
+.workflow-table td:first-child { min-width: 170px; }
+.workflow-table .secondary-action { text-align: left; }
+.project-parts > label { max-width: 640px; margin-bottom: 16px; }
+.project-parts .workflow-table td { font-variant-numeric: tabular-nums; }
+.project-part-name { width: 32%; }
+.project-part-places { display: grid; justify-items: start; gap: 6px; margin-top: 8px; }
+.project-part-places .secondary-action { padding: 4px 6px; font-size: 12px; }
+.purchase-supply { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 12px; line-height: 1.5; color: var(--muted); font-variant-numeric: tabular-nums; }
+.purchase-supply span { overflow-wrap: anywhere; }
+.workflow-totals { display: flex; flex-wrap: wrap; gap: 24px 48px; margin-block: 24px; border-block: 1px solid var(--line); padding-block: 20px; }
+.workflow-totals > div { display: grid; align-content: start; gap: 8px; }
+.workflow-totals strong { font-size: 23px; font-variant-numeric: tabular-nums; }
+.workflow-totals span { color: var(--muted); font-size: 13px; }
+.inventory-workflows .inventory-workflow-editor { border: 1px solid var(--line-strong); border-inline-start: 3px solid var(--brand-main); border-radius: 6px; background: var(--surface); padding: 24px; margin-bottom: 24px; scroll-margin-top: 150px; }
+.inventory-workflow-editor h3 { margin-top: 0; }
+.inventory-workflow-editor fieldset { min-width: 0; border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; }
+.inventory-workflow-editor fieldset > :is(p,.form-actions,.workflow-wide) { grid-column: 1 / -1; }
+.workflow-picker { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr); gap: 12px; grid-column: 1 / -1; }
+.inventory-workflow-editor .workflow-check { align-self: center; }
+.workflow-part-row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1fr) auto; gap: 12px; align-items: end; margin-block: 14px; }
+.workflow-order-selection { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.workflow-arrival-line { display: grid; grid-template-columns: minmax(0, 1fr) minmax(160px, 260px); gap: 12px 24px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.workflow-arrival-line > div { min-width: 0; }
+.workflow-arrival-line strong { overflow-wrap: anywhere; }
+.workflow-arrival-balance { font-size: 13px; font-variant-numeric: tabular-nums; }
+.inventory-workflows .workflow-arrival-extras { grid-column: 1 / -1; margin: 0; }
+.workflow-arrival-extras summary { font-size: 13px; padding-block: 4px; }
+.workflow-arrival-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-block: 16px; }
+.workflow-arrival-fields > p { grid-column: 1 / -1; }
+.purchase-request-composer { max-width: 960px; }
+.purchase-request-content { display: grid; gap: 14px; }
+.purchase-request-content > p { margin: 0; }
+.purchase-project { font-size: 16px; }
+.inventory-workflows .purchase-entry { margin: 0; border: 1px solid var(--brand-main); border-radius: 6px; padding: 12px; background: var(--surface-soft); }
+.purchase-entry summary { cursor: pointer; color: var(--brand-main); font-size: 15px; font-weight: 650; padding-block: 4px; }
+.purchase-entry > div { display: grid; gap: 12px; margin-top: 12px; }
+.purchase-entry p { margin: 0; color: var(--muted); font-size: 13px; }
+.purchase-new-part-quantity { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.purchase-part-link { grid-column: 1 / -1; min-width: 0; }
+.purchase-parts { max-height: 380px; overflow-y: auto; overscroll-behavior: contain; border-block: 1px solid var(--line); padding-inline: 4px; }
+.purchase-part { display: grid; grid-template-columns: minmax(0, 1fr) 92px 80px; gap: 12px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.purchase-part:last-child { border-bottom: 0; }
+.purchase-part > div { min-width: 0; }
+.purchase-part strong { font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.purchase-quantity-label { font-size: 11px; color: var(--muted); }
+.purchase-unit { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.purchase-remove { grid-column: 1 / -1; justify-self: start; }
+.purchase-selection { font-size: 13px; color: var(--muted); }
+.inventory-workflows .purchase-extras { margin: 0; }
+.purchase-extras[open] { display: grid; gap: 16px; }
+.purchase-extras summary { padding-block: 8px; font-size: 13px; }
+.purchase-part-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+.purchase-part-details > strong { grid-column: 1 / -1; overflow-wrap: anywhere; }
+.workflow-advanced { margin-top: 32px; border-top: 1px solid var(--line); }
+.workflow-advanced > .inventory-panel { border: 0; box-shadow: none; }
+.inventory-more-menu { position: relative; color: var(--ink); font-size: 13px; }
+.inventory-more-menu summary { cursor: pointer; padding: 10px; }
+.inventory-more-menu > div { position: absolute; z-index: 100; right: 0; width: 230px; max-height: 65vh; overflow-y: auto; padding: 6px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-medium); }
+.inventory-more-menu button { display: block; width: 100%; padding: 10px 12px; text-align: left; border: 0; color: var(--ink); background: transparent; cursor: pointer; }
+.inventory-more-menu button:hover, .inventory-more-menu button[aria-current] { background: var(--surface-active); }
+@media (max-width: 900px) {
+  .workflow-row { flex-direction: column; gap: 12px; }
+  .workflow-row-actions { justify-content: start; max-width: none; flex-shrink: 1; }
+  .workflow-part-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-parts .workflow-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .project-parts .workflow-table, .project-parts .workflow-table tbody { display: block; }
+  .project-parts .workflow-table tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+  .project-parts .workflow-table td { display: block; min-width: 0; max-width: none; width: auto; padding: 0; border: 0; }
+  .project-parts td[data-label]::before { content: attr(data-label); display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+  .project-part-name, .project-part-actions { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .workflow-body { padding: 0 16px 16px; }
+  .inventory-workflows .inventory-workflow-editor { padding: 16px; }
+  .inventory-workflows .inventory-workflow-editor, .workflow-body > section, .workflow-request-batch { scroll-margin-top: 260px; }
+  .inventory-workflow-editor fieldset, .workflow-picker, .workflow-filters, .workflow-arrival-line, .workflow-arrival-fields, .workflow-order-selection, .workflow-part-row { grid-template-columns: minmax(0, 1fr); }
+  .workflow-stock-item summary { flex-wrap: wrap; gap: 8px; }
+  .workflow-stock-item summary > span { max-width: none; text-align: left; width: 100%; padding-left: 22px; }
+  .inventory-workflows summary > span { display: block; margin: 6px 0 0; }
+  .workflow-totals { gap: 20px; }
+  .workflow-summary button { padding: 16px 12px; flex-basis: 120px; }
+  .workflow-row-actions .secondary-action { max-width: 100%; }
+  .purchase-part { grid-template-columns: minmax(0, 1fr) 72px 80px; gap: 8px; }
+  .purchase-part input { padding-inline: 8px; }
+  .purchase-part-details { grid-template-columns: minmax(0, 1fr); }
+}
+
+.inventory-workflows .procurement-hint { margin-block: 8px; }
+.inventory-workflows .procurement-hint > summary { padding-block: 6px; font-size: 13px; color: var(--brand-main); }
+.procurement-entries .workflow-row { padding-block: 12px; }
+.procurement-entries .workflow-status { display: inline-block; margin-block: 6px; }
+.procurement-entries a { display: inline-block; margin-top: 6px; }

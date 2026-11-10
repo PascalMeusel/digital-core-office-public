@@ -1,0 +1,6 @@
+<resources>
+    <item name="server_address_input" type="id" />
+    <item name="server_address_field" type="id" />
+    <item name="connect_server" type="id" />
+    <item name="recovery_change_server" type="id" />
+</resources>

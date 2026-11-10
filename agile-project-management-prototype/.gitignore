@@ -1,0 +1,11 @@
+node_modules
+dist
+.runtime
+*.local
+.env
+.env.*
+!.env.example
+!.env.*.example
+npm-debug.log*
+playwright-report
+test-results

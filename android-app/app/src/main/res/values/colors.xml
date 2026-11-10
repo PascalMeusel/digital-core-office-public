@@ -1,0 +1,10 @@
+<resources>
+    <color name="brand_teal">#0F766E</color>
+    <color name="brand_navy">#0F2530</color>
+    <color name="white">#FFFFFF</color>
+    <color name="office_background">#F2F7F9</color>
+    <color name="office_surface">#FFFFFF</color>
+    <color name="office_text">#0F2530</color>
+    <color name="office_muted">#4D636D</color>
+    <color name="office_border">#D8E4E8</color>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Digital Core Office</string>
+    <string name="setup_title">Choose your workplace server</string>
+    <string name="setup_explanation">Use the server address provided by your organization. Digital Core Office does not provide hosted servers.</string>
+    <string name="server_address">Server address</string>
+    <string name="server_hint">office.example.com</string>
+    <string name="setup_next">Then sign in with your workplace account. Your server is remembered on this device.</string>
+    <string name="connect">Continue to sign in</string>
+    <string name="checking_server">Checking server…</string>
+    <string name="invalid_server">Enter an HTTPS server address, without a page path, login details or query. Example: office.example.com</string>
+    <string name="unreachable_server">The server could not be reached. Check the address, internet connection, and HTTPS certificate.</string>
+    <string name="incompatible_server">This server is not a compatible Digital Core Office installation.</string>
+    <string name="change_server">Change server?</string>
+    <string name="change_server_explanation">This signs you out locally and clears this app’s website data. Data on the server is not deleted.</string>
+    <string name="change">Change server</string>
+    <string name="scan_cancelled">QR scan cancelled.</string>
+    <string name="scan_failed">The QR code could not be scanned.</string>
+    <string name="ssl_error">The secure connection failed. The page was not opened.</string>
+    <string name="file_picker_error">No file picker is available.</string>
+    <string name="no_browser">No browser is available for this link.</string>
+    <string name="retry_connection">Reload workplace</string>
+    <string name="export_in_progress">Finish or cancel the current export first.</string>
+    <string name="export_saved">File saved.</string>
+    <string name="export_cancelled">Export cancelled. No file was saved.</string>
+    <string name="export_failed">The file could not be saved. Please export it again.</string>
+    <string name="update_webview_exports">Update Android System WebView to save this export.</string>
+</resources>

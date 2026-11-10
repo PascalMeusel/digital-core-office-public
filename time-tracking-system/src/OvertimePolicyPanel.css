@@ -1,0 +1,12 @@
+.overtime-policy-panel { padding: var(--panel-inset, 18px); min-width: 0; overflow-wrap: anywhere; }
+.overtime-policy-panel h2 { margin-top: 0; }
+.overtime-policy-panel fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 16px; }
+.overtime-policy-panel label { display: grid; gap: 6px; min-width: 0; }
+.overtime-policy-panel input[type=number], .overtime-policy-panel select { width: 100%; min-width: 0; box-sizing: border-box; min-height: 44px; }
+.overtime-policy-panel .overtime-toggle { display: flex; align-items: flex-start; gap: 10px; }
+.overtime-policy-panel .overtime-toggle input[type=checkbox] { flex: 0 0 20px; width: 20px; height: 20px; min-height: 20px; padding: 0; margin: 2px 0 0; }
+.overtime-toggle span { min-width: 0; }
+.overtime-limits { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.overtime-recipients { display: grid; gap: 12px; }
+.overtime-policy-panel button { min-height: 44px; white-space: normal; }
+@media(max-width:600px) { .overtime-limits { grid-template-columns: 1fr; } }

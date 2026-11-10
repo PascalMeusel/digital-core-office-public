@@ -1,0 +1,14 @@
+[Unit]
+Description=Archive old Digital Core Office source releases and retain five rollback releases
+OnFailure=digital-core-office-operations.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/opt/node-current/bin/node /opt/digital-core-office/current/deploy/scripts/retain-releases.mjs --keep=5 --apply=true
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/digital-core-office/releases /var/backups/digital-core-office

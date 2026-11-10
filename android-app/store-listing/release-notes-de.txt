@@ -1,0 +1,4 @@
+Digital Core Office 1.0.3
+• Mehr Platz für den Arbeitsplatz: dauerhafte Server- und Office-Menü-Leiste entfernt
+• Server bei Bedarf über die Einstellungen auf der Anmeldeseite wechseln
+• Serverauswahl beim ersten Start und bei Verbindungsfehlern weiterhin verfügbar

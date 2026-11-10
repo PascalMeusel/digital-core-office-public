@@ -1,0 +1,18 @@
+[Unit]
+Description=Encrypted Digital Core Office suite backup
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/digital-core-office/current
+# Contains DCO_ENABLED_MODULES=time,inventory,agile (select installed products).
+EnvironmentFile=/etc/digital-core-office/backup.env
+ExecStart=/opt/node-current/bin/node /opt/digital-core-office/current/deploy/scripts/backup-suite.mjs --data-root=/var/lib/digital-core-office --output=/var/backups/digital-core-office --key-file=/etc/digital-core-office/suite-backup.key --retain-days=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/var/lib/digital-core-office
+ReadWritePaths=/var/backups/digital-core-office

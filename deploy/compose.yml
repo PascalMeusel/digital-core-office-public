@@ -1,0 +1,223 @@
+name: digital-core-office
+
+x-application-security: &application-security
+  init: true
+  read_only: true
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=64m"]
+  cap_drop: ["ALL"]
+  security_opt: ["no-new-privileges:true"]
+  pids_limit: 128
+  mem_limit: ${DCO_APP_MEMORY_LIMIT:-512m}
+  cpus: ${DCO_APP_CPU_LIMIT:-1.0}
+
+services:
+  core-service:
+    <<: *application-security
+    build:
+      context: ..
+      dockerfile: core-service/Dockerfile
+    image: digital-core-office-core:${DCO_RELEASE_TAG:-local}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4167
+      DCO_CORE_DATA: /data/digital-core-office.sqlite
+      DCO_PUBLIC_BASE_URL: ${DCO_PUBLIC_BASE_URL:?Set DCO_PUBLIC_BASE_URL in .env}
+      DCO_TIMEZONE: ${DCO_TIMEZONE:-Europe/Berlin}
+      TZ: ${DCO_TIMEZONE:-Europe/Berlin}
+      DCO_OPERATOR_NAME: ${DCO_OPERATOR_NAME:-}
+      DCO_OPERATOR_ADDRESS: ${DCO_OPERATOR_ADDRESS:-}
+      DCO_SUPPORT_EMAIL: ${DCO_SUPPORT_EMAIL:-}
+      DCO_PRIVACY_EMAIL: ${DCO_PRIVACY_EMAIL:-}
+      DCO_PRIVACY_DETAILS: ${DCO_PRIVACY_DETAILS:-}
+      DCO_ENABLED_MODULES: ${DCO_ENABLED_MODULES:?Enable one to three modules in .env}
+      DCO_INITIAL_ADMIN_NAME: ${DCO_INITIAL_ADMIN_NAME:-}
+      DCO_INITIAL_ADMIN_EMAIL: ${DCO_INITIAL_ADMIN_EMAIL:-}
+      DCO_INITIAL_ADMIN_PASSWORD: ${DCO_INITIAL_ADMIN_PASSWORD:-}
+      DCO_ALLOW_UNSAFE_ADMIN_PASSWORD: ${DCO_ALLOW_UNSAFE_ADMIN_PASSWORD:-false}
+      DCO_INTERNAL_AUTH_SECRET: ${DCO_INTERNAL_AUTH_SECRET:?Set DCO_INTERNAL_AUTH_SECRET in .env}
+      DIGITAL_OFFICE_SSO_SECRET: ${DIGITAL_OFFICE_SSO_SECRET:?Set DIGITAL_OFFICE_SSO_SECRET in .env}
+      DIGITAL_OFFICE_SSO_COOKIE_NAME: ${DIGITAL_OFFICE_SSO_COOKIE_NAME:-digital_office_sso}
+      DIGITAL_OFFICE_COOKIE_DOMAIN: ${DIGITAL_OFFICE_COOKIE_DOMAIN:-}
+      DCO_LICENSE_PUBLIC_KEY_FILE: ${DCO_LICENSE_PUBLIC_KEY_FILE:-/licenses/license-public.pem}
+      SMTP_HOST: ${DCO_SMTP_HOST:-}
+      SMTP_PORT: ${DCO_SMTP_PORT:-587}
+      SMTP_SECURE: ${DCO_SMTP_SECURE:-false}
+      SMTP_USER: ${DCO_SMTP_USER:-}
+      SMTP_PASS: ${DCO_SMTP_PASS:-}
+      SMTP_FROM: ${DCO_SMTP_FROM:-}
+    volumes:
+      - core_data:/data
+      - userbase_exchange:/userbase
+      - ./licenses:/licenses:ro
+      - ./migration:/migration:ro
+    expose: ["4167"]
+
+  time-tracking:
+    <<: *application-security
+    profiles: ["time"]
+    build:
+      context: ..
+      dockerfile: time-tracking-system/Dockerfile
+      args:
+        VITE_BASE_PATH: /time/
+        VITE_API_URL: /time
+        VITE_INVENTORY_URL: /inventory
+        VITE_AGILE_URL: /agile
+        VITE_CORE_URL: /
+        VITE_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+    image: digital-core-office-time-tracking:${DCO_RELEASE_TAG:-local}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4177
+      DCO_TIMEZONE: ${DCO_TIMEZONE:-Europe/Berlin}
+      TZ: ${DCO_TIMEZONE:-Europe/Berlin}
+      TIME_TRACKER_DATA: /data/time-tracker.sqlite
+      TIME_TRACKER_BACKUP_DIR: /data/backups
+      APP_BASE_URL: ${DCO_PUBLIC_BASE_URL}/time
+      DCO_CORE_URL: http://core-service:4167
+      DCO_CORE_LOGIN_URL: ${DCO_PUBLIC_BASE_URL}
+      DCO_INTERNAL_AUTH_SECRET: ${DCO_INTERNAL_AUTH_SECRET}
+      DCO_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+      DISABLE_LOCAL_WEB_LOGIN: ${DCO_DISABLE_LOCAL_WEB_LOGIN:-true}
+      DATA_ENCRYPTION_KEY: ${TIME_DATA_ENCRYPTION_KEY:-}
+      DIGITAL_OFFICE_SSO_SECRET: ${DIGITAL_OFFICE_SSO_SECRET}
+      DIGITAL_OFFICE_SSO_COOKIE_NAME: ${DIGITAL_OFFICE_SSO_COOKIE_NAME:-digital_office_sso}
+      DIGITAL_OFFICE_COOKIE_DOMAIN: ${DIGITAL_OFFICE_COOKIE_DOMAIN:-}
+      REQUIRE_DATA_ENCRYPTION: ${TIME_REQUIRE_DATA_ENCRYPTION:-true}
+      CORS_ORIGIN: ${DCO_PUBLIC_BASE_URL}
+      INITIAL_ADMIN_NAME: ""
+      INITIAL_ADMIN_EMAIL: ""
+      INITIAL_ADMIN_PASSWORD: ""
+    volumes:
+      - time_tracking_data:/data
+      - userbase_exchange:/userbase
+    expose: ["4177"]
+
+  inventory-management:
+    <<: *application-security
+    profiles: ["inventory"]
+    build:
+      context: ..
+      dockerfile: inventory-management-system/Dockerfile
+      args:
+        VITE_BASE_PATH: /inventory/
+        VITE_API_URL: /inventory
+        VITE_TIME_URL: /time
+        VITE_AGILE_URL: /agile
+        VITE_CORE_URL: /
+        VITE_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+    image: digital-core-office-inventory-management:${DCO_RELEASE_TAG:-local}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4187
+      DCO_TIMEZONE: ${DCO_TIMEZONE:-Europe/Berlin}
+      TZ: ${DCO_TIMEZONE:-Europe/Berlin}
+      INVENTORY_SYSTEM_DATA: /data/inventory-system.sqlite
+      INVENTORY_REFERENCE_DATA_FILE: ${INVENTORY_REFERENCE_DATA_FILE:-}
+      DCO_CORE_URL: http://core-service:4167
+      DCO_CORE_LOGIN_URL: ${DCO_PUBLIC_BASE_URL}
+      DCO_INTERNAL_AUTH_SECRET: ${DCO_INTERNAL_AUTH_SECRET}
+      DCO_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+      DISABLE_LOCAL_WEB_LOGIN: ${DCO_DISABLE_LOCAL_WEB_LOGIN:-true}
+      INVENTORY_SYSTEM_ADMIN_NAME: ""
+      INVENTORY_SYSTEM_ADMIN_EMAIL: ""
+      INVENTORY_SYSTEM_ADMIN_PASSWORD: ""
+      CORS_ORIGIN: ${DCO_PUBLIC_BASE_URL}
+      DIGITAL_OFFICE_SSO_SECRET: ${DIGITAL_OFFICE_SSO_SECRET}
+      DIGITAL_OFFICE_SSO_COOKIE_NAME: ${DIGITAL_OFFICE_SSO_COOKIE_NAME:-digital_office_sso}
+      DIGITAL_OFFICE_COOKIE_DOMAIN: ${DIGITAL_OFFICE_COOKIE_DOMAIN:-}
+    volumes:
+      - inventory_management_data:/data
+      - userbase_exchange:/userbase
+    expose: ["4187"]
+
+  agile-project-management:
+    <<: *application-security
+    profiles: ["agile"]
+    build:
+      context: ..
+      dockerfile: agile-project-management-prototype/Dockerfile
+      args:
+        VITE_BASE_PATH: /agile/
+        VITE_API_URL: /agile
+        VITE_TIME_URL: /time
+        VITE_INVENTORY_URL: /inventory
+        VITE_CORE_URL: /
+        VITE_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+    image: digital-core-office-agile-project-management:${DCO_RELEASE_TAG:-local}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4197
+      DCO_TIMEZONE: ${DCO_TIMEZONE:-Europe/Berlin}
+      TZ: ${DCO_TIMEZONE:-Europe/Berlin}
+      AGILE_PROJECT_DATA: /data/agile-project.sqlite
+      DCO_CORE_URL: http://core-service:4167
+      DCO_CORE_LOGIN_URL: ${DCO_PUBLIC_BASE_URL}
+      DCO_INTERNAL_AUTH_SECRET: ${DCO_INTERNAL_AUTH_SECRET}
+      DCO_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+      DISABLE_LOCAL_WEB_LOGIN: ${DCO_DISABLE_LOCAL_WEB_LOGIN:-true}
+      AGILE_INITIAL_ADMIN_NAME: ""
+      AGILE_INITIAL_ADMIN_EMAIL: ""
+      AGILE_INITIAL_ADMIN_PASSWORD: ""
+      CORS_ORIGIN: ${DCO_PUBLIC_BASE_URL}
+      DIGITAL_OFFICE_SSO_SECRET: ${DIGITAL_OFFICE_SSO_SECRET}
+      DIGITAL_OFFICE_SSO_COOKIE_NAME: ${DIGITAL_OFFICE_SSO_COOKIE_NAME:-digital_office_sso}
+      DIGITAL_OFFICE_COOKIE_DOMAIN: ${DIGITAL_OFFICE_COOKIE_DOMAIN:-}
+    volumes:
+      - agile_project_data:/data
+      - userbase_exchange:/userbase
+    expose: ["4197"]
+
+  caddy:
+    image: caddy:2.10-alpine@sha256:4c6e91c6ed0e2fa03efd5b44747b625fec79bc9cd06ac5235a779726618e530d
+    restart: unless-stopped
+    depends_on: ["core-service"]
+    ports: ["80:80", "443:443"]
+    environment:
+      DCO_APP_HOST: ${DCO_APP_HOST:?Set DCO_APP_HOST in .env}
+      DCO_INTERNAL_AUTH_SECRET: ${DCO_INTERNAL_AUTH_SECRET}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+  backup:
+    <<: *application-security
+    # Read private keys/assets and write operator-owned backup folders on Linux.
+    # Data mounts remain read-only; no mount or network administration is granted.
+    user: "0:0"
+    cap_add: ["DAC_OVERRIDE"]
+    profiles: ["backup"]
+    image: digital-core-office-core:${DCO_RELEASE_TAG:-local}
+    restart: unless-stopped
+    entrypoint: ["node", "/app/deploy-scripts/scheduled-backup.mjs"]
+    environment:
+      DCO_ENABLED_MODULES: ${DCO_ENABLED_MODULES}
+      DCO_BACKUP_INTERVAL_HOURS: ${DCO_BACKUP_INTERVAL_HOURS:-24}
+      DCO_BACKUP_RETAIN_DAYS: ${DCO_BACKUP_RETAIN_DAYS:-30}
+    volumes:
+      - core_data:/data/core:ro
+      - time_tracking_data:/data/time:ro
+      - inventory_management_data:/data/inventory:ro
+      - agile_project_data:/data/agile:ro
+      - ${DCO_BACKUP_DIRECTORY:-./backups}:/backups
+      - ${DCO_BACKUP_KEY_FILE:-./secrets/backup.key}:/run/secrets/backup_key:ro
+    healthcheck:
+      test: ["CMD", "node", "/app/deploy-scripts/scheduled-backup.mjs", "--health"]
+      interval: 5m
+      timeout: 5s
+      start_period: 10m
+      retries: 1
+
+volumes:
+  core_data:
+  time_tracking_data:
+  inventory_management_data:
+  agile_project_data:
+  userbase_exchange:
+  caddy_data:
+  caddy_config:

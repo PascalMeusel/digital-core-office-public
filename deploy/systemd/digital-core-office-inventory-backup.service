@@ -1,0 +1,21 @@
+[Unit]
+Description=Encrypted Digital Core Office inventory backup
+After=digital-core-office-inventory.service
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/digital-core-office/current/inventory-management-system
+Environment=INVENTORY_SYSTEM_DATA=/var/lib/digital-core-office/inventory/inventory-system.sqlite
+Environment=INVENTORY_MEDIA_DIR=/var/lib/digital-core-office/inventory/media
+Environment=PATH=/opt/node-current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+ExecStart=/opt/node-current/bin/npm run inventory:backup -- --database /var/lib/digital-core-office/inventory/inventory-system.sqlite --media-dir /var/lib/digital-core-office/inventory/media --output-dir /var/backups/digital-core-office/inventory --key-file /etc/digital-core-office/inventory-backup.key --retain-days 30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/digital-core-office/inventory /var/backups/digital-core-office/inventory
+
+[Install]
+WantedBy=multi-user.target

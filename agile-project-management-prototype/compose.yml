@@ -1,0 +1,43 @@
+name: digital-core-office-agile-project-management
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: agile-project-management-prototype/Dockerfile
+    image: digital-core-office-agile-project-management:latest
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4197
+      AGILE_PROJECT_DATA: /data/agile-project.sqlite
+      AGILE_INITIAL_ADMIN_NAME: ${AGILE_INITIAL_ADMIN_NAME:-}
+      AGILE_INITIAL_ADMIN_EMAIL: ${AGILE_INITIAL_ADMIN_EMAIL:-}
+      AGILE_INITIAL_ADMIN_PASSWORD: ${AGILE_INITIAL_ADMIN_PASSWORD:-}
+      CORS_ORIGIN: ${CORS_ORIGIN:-}
+    volumes:
+      - agile_project_data:/data
+      - userbase_exchange:/userbase
+    expose:
+      - "4197"
+
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_HOST: ${APP_HOST:?Set APP_HOST in .env.docker, for example agile.example.com}
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  agile_project_data:
+  userbase_exchange:
+  caddy_data:
+  caddy_config:

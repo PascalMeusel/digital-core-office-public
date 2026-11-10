@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily encrypted Digital Core Office suite backup
+
+[Timer]
+OnCalendar=*-*-* 02:45:00 Europe/Berlin
+Persistent=true
+RandomizedDelaySec=15m
+Unit=digital-core-office-suite-backup.service
+
+[Install]
+WantedBy=timers.target

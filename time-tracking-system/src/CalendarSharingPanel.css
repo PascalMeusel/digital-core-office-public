@@ -1,0 +1,17 @@
+.calendar-sharing-panel { min-width:0; }
+.calendar-sharing-panel > p { font-size:.85rem; line-height:1.6; }
+.calendar-sharing-search { display:grid; gap:8px; font-size:.85rem; }
+.calendar-sharing-search input { min-width:0; width:100%; min-height:44px; border:1px solid var(--line); border-radius:8px; padding:10px 12px; background:var(--surface); color:var(--ink); }
+.calendar-sharing-panel ul { list-style:none; margin:0; padding:0; }
+.calendar-sharing-results,.calendar-sharing-granted { max-height:320px; overflow:auto; }
+.calendar-sharing-person { display:flex; align-items:center; gap:12px; justify-content:space-between; border-bottom:1px solid var(--line); padding:12px 0; }
+.calendar-sharing-person > span { min-width:0; overflow-wrap:anywhere; }
+.calendar-sharing-person strong { font-size:.85rem; }
+.calendar-sharing-person small { display:block; margin-top:4px; color:var(--muted); font-size:.75rem; }
+.calendar-sharing-person button { min-height:44px; flex-shrink:0; font-size:.8rem; }
+.calendar-sharing-panel h3 { display:flex; gap:10px; font-size:.95rem; margin:24px 0 8px; }
+.calendar-sharing-panel h3 span { color:var(--muted); }
+.calendar-sharing-save { display:flex; flex-wrap:wrap; gap:8px; }
+.calendar-sharing-status { min-height:1.6em; margin-bottom:0; }
+@media(max-width:400px) { .calendar-sharing-person { flex-wrap:wrap; } }
+.calendar-sharing-panel > :not(.panel-title) { margin-left:var(--panel-inset, 18px); margin-right:var(--panel-inset, 18px); }

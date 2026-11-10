@@ -1,0 +1,75 @@
+.inventory-workspace-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; align-items: start; padding: 24px 32px; }
+.inventory-workspace-layout > .dco-suite-content { min-width: 0; padding: 0; }
+.inventory-sidebar { position: sticky; top: 96px; min-width: 0; }
+.inventory-sidebar nav { display: grid; gap: 4px; }
+.inventory-sidebar nav button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px; text-align: left; border: 0; border-radius: 5px; background: transparent; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer; }
+.inventory-sidebar nav button:hover { background: var(--surface-hover); color: var(--ink); }
+.inventory-sidebar nav button[aria-current] { background: var(--surface-active); color: var(--ink-strong); font-weight: 650; box-shadow: inset 3px 0 var(--brand-main); }
+.inventory-sidebar nav button svg { flex-shrink: 0; }
+.inventory-navigation-tools { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--line); margin-top: 20px; padding-top: 12px; }
+.inventory-sidebar .inventory-more-menu > div { left: 0; right: auto; }
+.inventory-mobile-navigation { display: none; }
+.inventory-sidebar :is(button,summary):focus-visible, .workspace-section-tabs button:focus-visible { outline: 3px solid var(--brand-secondary); outline-offset: 3px; }
+.workspace-section-tabs { display: flex; gap: 20px; flex-wrap: wrap; border-bottom: 1px solid var(--line-strong); margin-block: 8px 20px; }
+.workspace-section-tabs button { padding: 10px 0; border: 0; border-bottom: 3px solid transparent; border-radius: 0; background: transparent; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer; }
+.workspace-section-tabs button[aria-selected=true] { color: var(--ink-strong); font-weight: 650; border-bottom-color: var(--brand-main); }
+.workspace-sections > [hidden] { display: none; }
+.inventory-catalog-navigation { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.inventory-catalog-navigation button { padding: 9px 12px; }
+.inventory-catalog-navigation button[aria-current] { background: var(--surface-active); color: var(--ink-strong); border-color: var(--brand-main); }
+.inventory-workflow-dialog { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(760px, 100vw); height: 100dvh; max-width: 100vw; max-height: 100dvh; padding: 0 24px 24px; border: 0; border-left: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); overflow: auto; overscroll-behavior: contain; box-shadow: -12px 0 48px var(--shadow-medium); }
+.inventory-workflow-dialog::backdrop { background: rgb(8 17 28 / 50%); }
+/* Reserve space for the sticky toolbar and wrapped action row during native
+   keyboard focus scrolling, including short phone/landscape viewports. */
+.inventory-workflow-dialog { scroll-padding-block: 76px 130px; }
+.workflow-dialog-toolbar { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 2; margin-bottom: 16px; padding-block: 12px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.workflow-dialog-toolbar > span { color: var(--muted); font-size: 13px; }
+.workflow-dialog-notice { color: var(--ink); background: var(--surface-soft); padding: 12px; }
+.inventory-workflows .inventory-workflow-dialog .inventory-workflow-editor { border: 0; padding: 0; margin: 0; max-width: none; }
+.inventory-workflow-dialog .inventory-workflow-editor h3 { font-size: 22px; line-height: 1.3; margin-bottom: 20px; }
+.inventory-workflow-dialog .inventory-workflow-editor fieldset { gap: 16px; }
+.inventory-workflow-dialog .inventory-workflow-editor fieldset > .form-actions { position: sticky; bottom: -24px; z-index: 1; background: var(--surface); border-top: 1px solid var(--line); padding-block: 16px; margin: 0; }
+.inventory-workflow-dialog .purchase-parts { max-height: none; overflow: visible; }
+.inventory-workflows .workflow-text-action { display: inline; width: auto; padding: 0; border: 0; background: transparent; color: var(--brand-main); text-align: left; font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.inventory-workflows .workflow-table td { padding-block: 10px; }
+.inventory-workflows .project-part-places { gap: 4px; margin-top: 5px; }
+.inventory-workflows .project-part-name { width: 28%; }
+.project-scope-header { display: flex; gap: 20px; justify-content: space-between; align-items: start; margin-block: 16px; }
+.project-scope-header h3 { margin: 0; font-size: 20px; }
+.project-scope-header > div { min-width: 0; }
+.inventory-workflows .project-options { margin: 0; }
+.project-options > summary { padding: 4px 0; font-size: 13px; }
+.project-options[open] { padding: 12px; border: 1px solid var(--line); background: var(--surface-soft); }
+.inventory-workflows .clickup-request { background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0; margin: 0; padding: 0; }
+.inventory-workflows .clickup-request > summary { font-size: 12px; font-weight: 400; padding: 8px 0; color: var(--muted); margin: 0; }
+.inventory-workflows .clickup-request[open] { padding-bottom: 12px; }
+.workflow-role-intro { font-size: 16px; color: var(--ink-strong); }
+.inventory-workflows .workflow-page .workspace-page-header { padding-block: 20px; }
+.inventory-workflows .workflow-page .workspace-page-header h2 { font-size: 24px; line-height: 1.3; }
+.inventory-workflows .workflow-feedback:empty { display: none; }
+.inventory-workflows .project-options > summary { padding-block: 6px; }
+@media (max-width: 1100px) {
+ .inventory-workspace-layout { grid-template-columns: 175px minmax(0,1fr); gap: 16px; }
+ .inventory-workflows .workflow-body { padding-inline: 18px; }
+}
+@media (max-width: 800px) {
+ .inventory-workspace-layout { display: block; padding: 16px; }
+ .inventory-sidebar { position: relative; top: auto; margin-bottom: 14px; }
+ .inventory-sidebar .inventory-desktop-navigation { display: none; }
+ .inventory-mobile-navigation { display: block; border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface); }
+ .inventory-mobile-navigation summary { cursor: pointer; padding: 12px; font-weight: 600; }
+ .inventory-mobile-navigation nav { padding: 0 8px 8px; }
+ .inventory-navigation-tools { display: none; }
+ .inventory-workflows .workflow-page .workspace-page-header { padding: 16px; }
+ .inventory-workflows .workflow-page .workspace-page-header h2 { font-size: 24px; }
+ .project-scope-header { flex-wrap: wrap; }
+ .workspace-section-tabs { gap: 8px 16px; }
+ .workspace-section-tabs button { min-height: 44px; }
+}
+@media (max-width: 600px) {
+ .inventory-workflow-dialog { padding: 0 16px 16px; border: 0; }
+ .inventory-workflow-dialog .inventory-workflow-editor fieldset { grid-template-columns: minmax(0,1fr); }
+ .inventory-workflow-dialog .inventory-workflow-editor fieldset > .form-actions { bottom: -16px; }
+ .inventory-workflow-dialog .workflow-picker { grid-template-columns: minmax(0,1fr); }
+ .inventory-workflows .project-parts .workflow-table tr { padding-block: 14px; }
+}

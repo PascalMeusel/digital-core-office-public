@@ -1,0 +1,14 @@
+[Unit]
+Description=Verify encrypted Digital Core Office backup through an isolated restore
+OnFailure=digital-core-office-operations.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/opt/node-current/bin/node /opt/digital-core-office/current/deploy/scripts/verify-backup.mjs --directory=/var/backups/digital-core-office --key-file=/etc/digital-core-office/suite-backup.key
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/backups/digital-core-office

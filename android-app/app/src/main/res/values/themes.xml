@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.DigitalCoreOffice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_teal</item>
+        <item name="colorPrimaryVariant">@color/brand_navy</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:navigationBarColor">@color/office_background</item>
+        <item name="android:statusBarColor">@color/office_background</item>
+        <item name="colorSurface">@color/office_surface</item>
+        <item name="android:colorBackground">@color/office_background</item>
+        <item name="colorOnSurface">@color/office_text</item>
+    </style>
+    <style name="Theme.DigitalCoreOffice" parent="Base.Theme.DigitalCoreOffice" />
+</resources>

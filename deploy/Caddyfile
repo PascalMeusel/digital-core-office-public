@@ -1,0 +1,43 @@
+{$DCO_APP_HOST} {
+  encode gzip zstd
+
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "strict-origin-when-cross-origin"
+  }
+
+  @suite_shell path /time /time/ /inventory /inventory/ /agile /agile/
+  route @suite_shell {
+    reverse_proxy core-service:4167
+  }
+
+  route /time* {
+    forward_auth core-service:4167 {
+      uri /api/core/internal/route-check?module=time
+      header_up X-DCO-Internal-Secret {$DCO_INTERNAL_AUTH_SECRET}
+    }
+    uri strip_prefix /time
+    reverse_proxy time-tracking:4177
+  }
+
+  route /inventory* {
+    forward_auth core-service:4167 {
+      uri /api/core/internal/route-check?module=inventory
+      header_up X-DCO-Internal-Secret {$DCO_INTERNAL_AUTH_SECRET}
+    }
+    uri strip_prefix /inventory
+    reverse_proxy inventory-management:4187
+  }
+
+  route /agile* {
+    forward_auth core-service:4167 {
+      uri /api/core/internal/route-check?module=agile
+      header_up X-DCO-Internal-Secret {$DCO_INTERNAL_AUTH_SECRET}
+    }
+    uri strip_prefix /agile
+    reverse_proxy agile-project-management:4197
+  }
+
+  reverse_proxy core-service:4167
+}

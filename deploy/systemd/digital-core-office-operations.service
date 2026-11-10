@@ -1,0 +1,17 @@
+[Unit]
+Description=Digital Core Office health, disk and backup alerts
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+EnvironmentFile=/etc/digital-core-office/core.env
+EnvironmentFile=/etc/digital-core-office/operations.env
+ExecStart=/opt/node-current/bin/node /opt/digital-core-office/current/deploy/scripts/operations-monitor.mjs --recipient=${DCO_ALERT_RECIPIENT}
+StateDirectory=digital-core-office-operations
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/digital-core-office-operations

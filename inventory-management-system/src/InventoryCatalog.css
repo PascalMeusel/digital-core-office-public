@@ -1,0 +1,18 @@
+.catalog-tools { margin: 16px 20px; }
+.inventory-workflows .search-field input { padding-left: 36px; }
+.catalog-manager { display: grid; gap: 16px; padding: 24px; min-width: 0; }
+.catalog-manager label, .catalog-photo-field { display: grid; gap: 8px; min-width: 0; }
+.catalog-manager textarea { width: 100%; }
+.catalog-project-picker { margin: 0; border: 1px solid var(--line-strong); padding: 12px; min-width: 0; }
+.catalog-project-picker p { margin: 0 0 12px; }
+.catalog-project-picker > div, .catalog-article-picker { display: grid; gap: 10px; max-height: 280px; overflow: auto; }
+.catalog-project-picker label, .inventory-form .catalog-project-picker label, .catalog-manager .catalog-project-picker label, .catalog-manager .catalog-article-picker label { display: flex; align-items: center; gap: 10px; overflow-wrap: anywhere; }
+.catalog-project-picker input[type=checkbox], .catalog-article-picker input[type=checkbox] { width: 18px; height: 18px; flex: 0 0 18px; }
+.catalog-photo-field img { width: 160px; height: 120px; object-fit: contain; }
+.catalog-photo-field input[type=file] { max-width: 100%; }
+.catalog-history { margin-top: 20px; border-top: 1px solid var(--line-strong); padding-top: 16px; }
+.catalog-history summary { cursor: pointer; font-weight: 650; }
+.catalog-history ol { list-style: none; padding: 0; }
+.catalog-history li { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 6px 16px; padding: 12px 0; border-bottom: 1px solid var(--line-strong); overflow-wrap: anywhere; }
+.catalog-history small { grid-column: 2 / -1; }
+@media(max-width: 600px) { .catalog-manager { padding: 16px; } .catalog-history li { grid-template-columns: 1fr; } .catalog-history small { grid-column: auto; } }

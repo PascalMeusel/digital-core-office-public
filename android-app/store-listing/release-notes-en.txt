@@ -1,0 +1,4 @@
+Digital Core Office 1.0.3
+• More room for your workplace: removed the persistent server and Office menu bar
+• Change servers when needed using the settings button on the login screen
+• Server selection on first launch and offline recovery remain available

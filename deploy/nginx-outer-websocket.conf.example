@@ -1,0 +1,22 @@
+# In the OUTER nginx HTTP block, outside any server/location block:
+map $http_upgrade $dco_connection_upgrade {
+    default upgrade;
+    '' close;
+}
+
+# Add inside the existing TLS virtual host for the suite.
+# Keep the existing certificate, access policy and other location blocks.
+# This URI must reach the application server with its /time prefix intact.
+location = /time/api/live {
+    proxy_pass http://127.0.0.1:8080;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $dco_connection_upgrade;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_read_timeout 90s;
+    proxy_send_timeout 90s;
+    proxy_buffering off;
+}

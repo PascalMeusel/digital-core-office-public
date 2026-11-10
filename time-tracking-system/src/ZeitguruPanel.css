@@ -1,0 +1,21 @@
+.zeitguru-panel { margin-top: 18px; border-top: 1px solid var(--line-strong); padding-top: 14px; text-align: left; font-size: .875rem; min-width: 0; }
+.zeitguru-panel summary { display: flex; flex-direction: column; gap: 5px; cursor: pointer; border-radius: 6px; }
+.zeitguru-panel summary:focus-visible { outline: 2px solid var(--brand-teal); outline-offset: 5px; }
+.zeitguru-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.zeitguru-heading small, .zeitguru-last-action { color: var(--muted); }
+.zeitguru-manage { text-decoration: underline; text-underline-offset: 3px; }
+.zeitguru-status { line-height: 1.45; }
+.zeitguru-status.attention { font-weight: 700; }
+.zeitguru-content { display: grid; gap: 12px; padding-top: 14px; overflow-wrap: anywhere; }
+.zeitguru-content p { margin: 0; }
+.zeitguru-identity { display: grid; gap: 3px; }
+.zeitguru-form { display: grid; gap: 8px; margin: 0; }
+.zeitguru-form input, .zeitguru-form select { min-width: 0; width: 100%; box-sizing: border-box; }
+.zeitguru-form label { margin: 0; }
+.zeitguru-consent { display: flex; align-items: flex-start; gap: 9px; line-height: 1.5; padding: 8px 0; }
+.zeitguru-consent input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; }
+.zeitguru-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.zeitguru-actions button, .zeitguru-content > button, .zeitguru-form > button { white-space: normal; min-height: 44px; }
+.zeitguru-actions small { flex-basis: 100%; }
+.zeitguru-attention, .zeitguru-disconnect { border-left: 3px solid currentColor; padding: 10px 12px; background: var(--surface-soft); }
+.zeitguru-disconnect { display: grid; gap: 10px; }

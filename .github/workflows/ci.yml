@@ -1,0 +1,188 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  applications:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - core-service
+          - time-tracking-system
+          - inventory-management-system
+          - agile-project-management-prototype
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: ${{ matrix.project }}/package-lock.json
+      - run: npm ci
+      - run: npm audit --omit=dev
+      - run: npm run lint
+      - if: matrix.project == 'core-service'
+        run: npm run build && npm run typecheck && npm test
+      - if: matrix.project == 'time-tracking-system'
+        run: npm run build && npm run test:unit
+      - if: matrix.project == 'inventory-management-system'
+        run: npm run build && npm run test:unit
+      - if: matrix.project == 'agile-project-management-prototype'
+        run: npm run build && npm test
+
+  deployment-configurations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate all seven configurations, release packaging and backup tools
+        env:
+          DCO_TEST_DOCKER_CONFIG: 'true'
+        run: node --test scripts/tests/*.test.mjs deploy/tests/*.test.mjs
+
+  production-deployments:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        modules: [time, inventory, agile, 'time,inventory', 'time,agile', 'inventory,agile', 'time,inventory,agile']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build selected production services and test with real Caddy and empty volumes
+        env:
+          DCO_SMOKE_MODULES: ${{ matrix.modules }}
+        run: node deploy/tests/production-smoke.mjs --build-images
+
+  suite-shell-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            core-service/package-lock.json
+            time-tracking-system/package-lock.json
+            inventory-management-system/package-lock.json
+            agile-project-management-prototype/package-lock.json
+      - run: npm ci --prefix core-service
+      - run: npm ci --prefix time-tracking-system
+      - run: npm ci --prefix inventory-management-system
+      - run: npm ci --prefix agile-project-management-prototype
+      - run: npx playwright install --with-deps chromium firefox
+        working-directory: time-tracking-system
+      - name: Check session recovery and confirmed sign-out in Chromium and Firefox
+        run: node tests/session-recovery.browser.test.mjs
+        working-directory: core-service
+      - name: Check Time session recovery and unsaved requests
+        run: node tests/session-recovery.browser.test.mjs
+        working-directory: time-tracking-system
+      - name: Check Zeitguru pending delivery and disconnected status
+        run: node tests/zeitguru-live-sync.browser.test.mjs
+        working-directory: time-tracking-system
+      - name: Check Inventory recovery, receipt drafts and stock conflicts
+        run: node tests/workspace-recovery.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check Inventory search and project assignments with the real API
+        run: node tests/projects-search.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check Inventory requests, builds, receiving and room plans across roles
+        run: node tests/workflows.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check Inventory ClickUp integration with a simulated external API
+        run: node --import tsx tests/clickup.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check Inventory structure, panels and keyboard navigation
+        run: node tests/structure.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check persisted room plans, photos and zoom without build symlinks
+        run: node tests/roomplans.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check article photos, imports, shared project lists and new part requests
+        run: node tests/catalog.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Check new part requests above long catalogs for software users
+        run: node tests/request-entry.browser.test.mjs
+        working-directory: inventory-management-system
+      - name: Inventory request guidance
+        working-directory: inventory-management-system
+        run: node tests/guidance.browser.test.mjs
+      - name: Check request drafts, project changes, selection and retry behavior
+        working-directory: inventory-management-system
+        run: node tests/request-usability.browser.test.mjs
+      - name: Check project queues, pasted requests, purchasing and receiving drafts
+        working-directory: inventory-management-system
+        run: node tests/workday.browser.test.mjs
+      - name: Check Project recovery and responsive layouts
+        run: node tests/session-recovery.browser.test.mjs
+        working-directory: agile-project-management-prototype
+      - run: npm run test:suite --prefix time-tracking-system
+
+  android-publishing-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci --prefix android-app/publishing --ignore-scripts
+      - run: npm audit --prefix android-app/publishing --audit-level=high
+      - run: npm test --prefix android-app/publishing
+
+  android-client:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: android-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - name: Install Android 16 SDK
+        run: sdkmanager "platforms;android-36" "build-tools;35.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Unit test and build debug app
+        run: bash ./gradlew testDebugUnitTest assembleDebug lintRelease
+      - name: Reserve disk space for the Android emulator
+        run: |
+          # This Java/WebView app uses neither .NET nor the native Android SDK.
+          # API 36 needs its full userdata partition even with a smaller AVD setting.
+          sudo rm -rf /usr/share/dotnet "${ANDROID_HOME:?}/ndk"
+          df -h /
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Run Android recovery, setup and export tests on an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          target: google_apis
+          arch: x86_64
+          working-directory: android-app
+          disable-animations: true
+          script: bash ./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.dcoPreviewLocale=en

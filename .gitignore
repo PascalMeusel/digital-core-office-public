@@ -1,0 +1,91 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+
+# Runtime and test artifacts
+.runtime/
+.codex-screens/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+coverage/
+playwright-report/
+test-results/
+deploy/backups/
+deploy/secrets/
+.codex-remote-attachments/
+artifacts/**/*.tar.gz
+artifacts/**/*.aab
+artifacts/**/*.apk
+*.dco-backup
+*.dco-suite-backup
+deploy/migration/*
+!deploy/migration/README.md
+deploy/licenses/*.pem
+!deploy/licenses/license-public.pem
+deploy/private-licenses/
+**/tmp/
+**/.tmp-*
+*.tgz
+
+# Customer/reference source material and generated media are private inputs.
+inventory-management-system/docs/Inventory.zip
+inventory-management-system/docs/Inventory/
+inventory-management-system/docs/Layout ground floor inventory.pdf
+inventory-management-system/public/inventory-media/
+inventory-management-system/server/reference/inventorySource.json
+inventory-management-system/scripts/prepare_inventory_assets.py
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.local
+.license/
+android-app/local.properties
+android-app/secrets/*
+!android-app/secrets/.gitkeep
+deploy/private-review/*
+!deploy/private-review/.gitkeep
+android-app/.gradle/
+android-app/**/build/
+
+# Local application data
+server/data/*.json
+server/data/*.sqlite
+server/data/*.sqlite-*
+server/backups/*.sqlite
+**/server/data/*.json
+**/server/data/*.sqlite
+**/server/data/*.sqlite-*
+**/server/backups/*.sqlite
+
+# Editor and OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Private development, review and operational material
+.codex-attachments/
+.vite/
+artifacts/
+output/
+deploy/review-data/
+docs/incident-*.md
+android-app/store-listing/assets/screenshots/
+android-app/store-listing/release-checklist.md

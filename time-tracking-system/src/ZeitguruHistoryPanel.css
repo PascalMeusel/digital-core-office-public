@@ -1,0 +1,37 @@
+.zeitguru-history-panel { min-width: 0; display: grid; gap: 16px; overflow-wrap: anywhere; }
+.zeitguru-day-review { min-width: 0; padding: 20px; display: grid; gap: 16px; scroll-margin-top: 200px; }
+.zeitguru-day-review > h2, .zeitguru-day-review > p { margin: 0; }
+.zeitguru-accounting summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
+.zeitguru-accounting summary:focus-visible { outline: 2px solid var(--brand-teal); outline-offset: 3px; }
+.zeitguru-accounting .zeitguru-history-row { scroll-margin-top: 200px; }
+.zeitguru-history-panel p, .zeitguru-history-panel h2, .zeitguru-history-panel h3 { margin: 0; }
+.zeitguru-history-heading { display: grid; gap: 6px; }
+.zeitguru-history-heading h2 { font-size: 1.1rem; }
+.zeitguru-history-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.zeitguru-history-actions button, .zeitguru-history-panel > button { min-height: 44px; white-space: normal; }
+.zeitguru-history-totals, .zeitguru-history-result, .zeitguru-history-row dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; }
+.zeitguru-history-totals > div { padding: 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface-soft); }
+.zeitguru-history-panel dt { color: var(--muted); font-size: .8rem; line-height: 1.4; }
+.zeitguru-history-panel dd { margin: 4px 0 0; font-weight: 650; }
+.zeitguru-history-note, .zeitguru-history-confirm { padding: 12px; border-left: 3px solid var(--line-strong); background: var(--surface-soft); line-height: 1.5; }
+.zeitguru-history-confirm { display: grid; gap: 10px; }
+.zeitguru-history-batch { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.zeitguru-history-result { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.zeitguru-history-details summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
+.zeitguru-history-details summary:focus-visible { outline: 2px solid var(--brand-teal); outline-offset: 3px; }
+.zeitguru-history-rows { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.zeitguru-history-row { border: 1px solid var(--line); border-radius: 9px; padding: 12px; display: grid; gap: 10px; }
+.zeitguru-history-row header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 5px 12px; }
+.zeitguru-history-row small { color: var(--muted); }
+.zeitguru-history-pagination { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; }
+.zeitguru-history-pagination button { min-height: 44px; }
+.zeitguru-history-filter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: end; }
+.zeitguru-history-filter label { display: grid; gap: 5px; min-width: 0; }
+.zeitguru-history-filter input { width: 100%; min-width: 0; box-sizing: border-box; }
+.zeitguru-history-filter button { grid-column: 1 / -1; min-height: 44px; white-space: normal; }
+@media (max-width: 480px) {
+  .zeitguru-history-totals { grid-template-columns: 1fr; }
+  .zeitguru-history-result { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .zeitguru-history-row dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .zeitguru-history-actions > button { width: 100%; }
+}

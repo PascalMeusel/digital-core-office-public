@@ -1,0 +1,44 @@
+name: digital-core-office-inventory-management
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: inventory-management-system/Dockerfile
+    image: digital-core-office-inventory-management:latest
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 4187
+      INVENTORY_SYSTEM_DATA: /data/inventory-system.sqlite
+      INVENTORY_SYSTEM_ADMIN_NAME: ${INVENTORY_SYSTEM_ADMIN_NAME:-}
+      INVENTORY_SYSTEM_ADMIN_EMAIL: ${INVENTORY_SYSTEM_ADMIN_EMAIL:-}
+      INVENTORY_SYSTEM_ADMIN_PASSWORD: ${INVENTORY_SYSTEM_ADMIN_PASSWORD:-}
+      INVENTORY_SYSTEM_FORCE_ADMIN_PASSWORD: ${INVENTORY_SYSTEM_FORCE_ADMIN_PASSWORD:-false}
+      CORS_ORIGIN: ${CORS_ORIGIN:-}
+    volumes:
+      - inventory_management_data:/data
+      - userbase_exchange:/userbase
+    expose:
+      - "4187"
+
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_HOST: ${APP_HOST:?Set APP_HOST in .env.docker, for example inventory.example.com}
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  inventory_management_data:
+  userbase_exchange:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Digital Core Office</string>
+    <string name="setup_title">Server Ihres Arbeitsplatzes wählen</string>
+    <string name="setup_explanation">Verwenden Sie die Serveradresse Ihrer Organisation. Digital Core Office stellt keine gehosteten Server bereit.</string>
+    <string name="server_address">Serveradresse</string>
+    <string name="server_hint">office.example.com</string>
+    <string name="setup_next">Melden Sie sich danach mit Ihrem Arbeitsplatzkonto an. Der Server wird auf diesem Gerät gespeichert.</string>
+    <string name="connect">Weiter zur Anmeldung</string>
+    <string name="checking_server">Server wird geprüft…</string>
+    <string name="invalid_server">Geben Sie eine HTTPS-Serveradresse ohne Seitenpfad, Zugangsdaten oder Abfrage ein. Beispiel: office.example.com</string>
+    <string name="unreachable_server">Der Server ist nicht erreichbar. Prüfen Sie Adresse, Internetverbindung und HTTPS-Zertifikat.</string>
+    <string name="incompatible_server">Dieser Server ist keine kompatible Digital-Core-Office-Installation.</string>
+    <string name="change_server">Server wechseln?</string>
+    <string name="change_server_explanation">Sie werden lokal abgemeldet und die Webseitendaten dieser App werden gelöscht. Daten auf dem Server bleiben erhalten.</string>
+    <string name="change">Server wechseln</string>
+    <string name="scan_cancelled">QR-Scan abgebrochen.</string>
+    <string name="scan_failed">Der QR-Code konnte nicht gescannt werden.</string>
+    <string name="ssl_error">Die sichere Verbindung ist fehlgeschlagen. Die Seite wurde nicht geöffnet.</string>
+    <string name="file_picker_error">Keine Dateiauswahl verfügbar.</string>
+    <string name="no_browser">Kein Browser für diesen Link verfügbar.</string>
+    <string name="retry_connection">Arbeitsplatz neu laden</string>
+    <string name="export_in_progress">Schließen Sie zuerst den aktuellen Export ab oder brechen Sie ihn ab.</string>
+    <string name="export_saved">Datei gespeichert.</string>
+    <string name="export_cancelled">Export abgebrochen. Es wurde keine Datei gespeichert.</string>
+    <string name="export_failed">Die Datei konnte nicht gespeichert werden. Bitte exportieren Sie sie erneut.</string>
+    <string name="update_webview_exports">Aktualisieren Sie Android System WebView, um diesen Export zu speichern.</string>
+</resources>
